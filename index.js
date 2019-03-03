@@ -1,13 +1,14 @@
 // implement your API here
 
 const express = require("express");
-
 const db = require("./data/db");
+const cors = require('cors');
 
 const server = express();
 
 // middleware
 server.use(express.json());
+server.use(cors());
 
 server.get("/", (req, res) => {
   res.send("<h2>Hello From Local Host</h2>");
@@ -15,6 +16,7 @@ server.get("/", (req, res) => {
 
 // GET
 server.get("/api/users", (req, res) => {
+    //console.log(req)  
   db.find()
     .then(users => {
       res.status(201).json({ success: true, users });
